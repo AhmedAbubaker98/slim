@@ -74,7 +74,7 @@ jobs:
         run: |
           $binary = "data-plane/target/x86_64-pc-windows-msvc/release/slim.exe"
           $size = (Get-Item $binary).Length / 1MB
-          $version = cargo pkgid -p agntcy-slim | Select-String -Pattern '@(.*)$' | ForEach-Object { $_.Matches.Groups[1].Value }
+          $version = (cargo pkgid -p agntcy-slim --manifest-path data-plane/Cargo.toml | Select-String -Pattern '@(.*)$' | ForEach-Object { $_.Matches.Groups[1].Value })
           
           @"
           ## Windows x64 Binary
